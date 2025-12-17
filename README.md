@@ -30,3 +30,33 @@ Open **Foxglove Studio** on your PC and connect to:
 *   **LIDAR Throttling**: 5Hz limit to ensure stability on ARM CPUs.
 *   **Map Updates**: Reduced frequency (2.0s) to save bandwidth.
 *   **Topic Whitelist**: Blocks `/clock` and heavy topics from Rosbridge to prevent crashes.
+
+## 🛠 Development Workflow (PC ↔ Android)
+You can develop and refine files locally on your PC, but follow these rules to ensure the code works on the Android robot:
+
+1.  **Source Code Only**: Never sync the `build/` or `devel/` folders. They contain compiled binaries specific to your PC's CPU (x86), which will **break** on Android (ARM).
+2.  **Recompile on Device**: After moving changes to the phone (via Git or SSH), always run:
+    ```bash
+    cd ~/turtle_ws
+    catkin_make
+    source devel/setup.bash
+    ```
+3.  **Architecture Check**: PC simulators (like Gazebo) allow heavy physics. This project uses `stage_ros` specifically because it is lightweight enough for Android. Avoid adding heavy sensors or complex 3D meshes.
+4.  **Testing**:
+    *   **Logic (Launch/Python):** Safe to test on PC.
+    *   **Performance (Hz/CPU):** MUST be validated on the Android device.
+
+## 🛠 Development Workflow (PC ↔ Android)
+You can develop and refine files locally on your PC, but follow these rules to ensure the code works on the Android robot:
+
+1.  **Source Code Only**: Never sync the `build/` or `devel/` folders. They contain compiled binaries specific to your PC's CPU (x86), which will **break** on Android (ARM).
+2.  **Recompile on Device**: After moving changes to the phone (via Git or SSH), always run:
+    ```bash
+    cd ~/turtle_ws
+    catkin_make
+    source devel/setup.bash
+    ```
+3.  **Architecture Check**: PC simulators (like Gazebo) allow heavy physics. This project uses `stage_ros` specifically because it is lightweight enough for Android. Avoid adding heavy sensors or complex 3D meshes.
+4.  **Testing**:
+    *   **Logic (Launch/Python):** Safe to test on PC.
+    *   **Performance (Hz/CPU):** MUST be validated on the Android device.
