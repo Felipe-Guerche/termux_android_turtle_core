@@ -1,0 +1,7 @@
+<launch>
+  <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch">
+    <!-- Solution 1: The "Surgical" Whitelist -->
+    <!-- Explicitly allowing only necessary topics to avoid /clock serialization crash -->
+    <arg name="topics_glob" value="['/tf','/tf_static','/scan','/map','/map_metadata','/odom','/rosout','/rosout_agg','/cmd_vel','/initialpose','/slam_gmapping/entropy','/move_base/*']" />
+  </include>
+</launch>
